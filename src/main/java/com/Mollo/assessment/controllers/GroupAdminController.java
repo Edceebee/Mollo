@@ -42,20 +42,20 @@ public class GroupAdminController {
 
     }
 
-    @GetMapping("/")
-    public List<GroupAdmin> getAllGroups() {
-        return groupAdminService.getAllGroupAdmins();
-    }
+//    @GetMapping("/")
+//    public List<GroupAdmin> getAllGroups() {
+//        return groupAdminService.getAllGroupAdmins();
+//    }
 
     @GetMapping("/{groupAdminId}/{nameOfGroup}")
-    public List<GroupMember> getMembersFromGroup(@PathVariable Long groupAdminId, @PathVariable String nameOfGroup) {
-//        try {
-            return groupAdminService.getGroupMembers(groupAdminId, nameOfGroup);
-//            return new ResponseEntity<>(groupMember, HttpStatus.OK);
-//
-//        } catch (IllegalArgumentException exception) {
-//            return new ResponseEntity<>(new ApiResponses(exception.getMessage()),
-//                    HttpStatus.BAD_REQUEST);
-//        }
+    public ResponseEntity<?> getMembersFromGroup(@PathVariable Long groupAdminId, @PathVariable String nameOfGroup) {
+        try {
+           List<GroupMember> groupMember = groupAdminService.getGroupMembers(groupAdminId, nameOfGroup);
+            return new ResponseEntity<>(groupMember, HttpStatus.OK);
+
+        } catch (IllegalArgumentException exception) {
+            return new ResponseEntity<>(new ApiResponses(exception.getMessage()),
+                    HttpStatus.BAD_REQUEST);
+        }
     }
 }

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RequestMapping("/groupMembers/")
+@RequestMapping("/groupMembers")
 @RestController
 public class GroupMemberController {
 
@@ -24,7 +24,7 @@ public class GroupMemberController {
     @Autowired
     ModelMapper modelMapper;
 
-    @PostMapping("/{groupId}")
+    @PostMapping("/")
     public ResponseEntity<?> registerGroupMember(@RequestBody GroupMemberDto groupMemberDto) {
         try {
             GroupMember groupMemberRequest = modelMapper.map(groupMemberDto, GroupMember.class);
@@ -54,8 +54,4 @@ public class GroupMemberController {
         }
     }
 
-    @GetMapping("")
-    public List<GroupMember> allMembers() {
-        return groupMemberService.allGroupMembers();
-    }
 }
